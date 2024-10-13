@@ -40,7 +40,9 @@ public class SecurityConfig {
                         .requestMatchers("/css/**", "/js/**", "/", "/oauth/**", "/register", "/error",
                                 "/products", "/cart", "/cart/**")
                         .permitAll() // Cho phép truy cập không cần xác thực.
-                        .requestMatchers("/products/edit/**", "/products/add", "/products/delete", "/admin/manager")
+                        .requestMatchers("/products/edit/**", "/products/add", "/products/delete", "/admin/manager",
+                                "/categories/add","/categories/edit/**", "/categories/delete/**",
+                                "/brands/add","/brands/edit/** ","/brands/delete/**")
                         .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.
                         .requestMatchers("/api/**")
                         .permitAll() // API mở cho mọi người dùng.
@@ -68,7 +70,7 @@ public class SecurityConfig {
                         .userDetailsService(userDetailsService())
                 ) .
                 exceptionHandling(exceptionHandling -> exceptionHandling
-                        .accessDeniedPage("/403") // Trang báo lỗi khi truy cập không được phép.
+                        .accessDeniedPage("/access-denied") // Trang báo lỗi khi truy cập không được phép.
                 ) .
                 sessionManagement(sessionManagement -> sessionManagement
                         .maximumSessions(1) // Giới hạn số phiên đăng nhập.
