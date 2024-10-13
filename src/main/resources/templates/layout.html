@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>Layout</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+    }
+    .navbar {
+        background: white;
+        padding: 15px;
+    }
+    .navbar-brand {
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+    .navbar-brand svg {
+        margin-right: 10px;
+    }
+    .navbar-nav .nav-item .nav-link {
+        color: #000000 !important;
+        margin-right: 15px;
+    }
+    .navbar-nav .nav-item .nav-link:hover {
+        color: #C0C0C0 !important;
+        text-decoration: underline;
+    }
+    .navbar-nav .nav-item .btn {
+        margin-right: 15px;
+    }
+    .container {
+        margin-top: 50px;
+    }
+    h1 {
+        margin-bottom: 30px;
+        color: #343a40;
+    }
+    .dropdown-menu {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+    }
+    .dropdown-item .icon {
+        margin-right: 10px;
+    }
+    .dropdown-item:hover {
+        background-color: #f1f1f1;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+    .card {
+        border: none;
+        border-radius: 0.75rem;
+        box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
+    }
+    .card-header {
+        background-color: #007bff;
+        color: #fff;
+        border-top-left-radius: 0.75rem;
+        border-top-right-radius: 0.75rem;
+    }
+    .card-body {
+        padding: 2rem;
+    }
+    .card-title {
+        margin-bottom: 1.5rem;
+    }
+    .list-group-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .list-group-item i {
+        margin-right: 1rem;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="/products">
+      <img th:src="@{/images/logonavbar.png}" alt="Logo" height="50px" width="120px">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')">
+          <a class="nav-link text-white" href="/admin/manager">
+            <i class="fas fa-cogs icon"></i>Quản Lí
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+        <li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()">
+                    <span class="navbar-text text-white">
+                        Xin chào, <span sec:authentication="name" style="margin-right: 20px;"></span>
+                    </span>
+        </li>
+        <li class="nav-item" sec:authorize="isAuthenticated()">
+          <form th:action="@{/logout}" method="post">
+            <button class="btn btn-outline-light btn-dark" type="submit">Logout</button>
+          </form>
+        </li>
+        <li class="nav-item" sec:authorize="!isAuthenticated()">
+          <a class="btn btn-outline-light btn-dark" href="/login">Đăng Nhập</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container mt-5">
+  <section layout:fragment="content">
+  </section>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
