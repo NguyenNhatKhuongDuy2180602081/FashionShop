@@ -1,4 +1,4 @@
-package Nhom08_AppleStore.controller;
+package Nhom1_FashionShop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
